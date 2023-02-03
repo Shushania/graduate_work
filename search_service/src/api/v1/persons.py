@@ -52,7 +52,11 @@ async def get_all_persons(pagination: PaginatedParams = Depends(PaginatedParams)
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail=PERSON_NOT_FOUND_STR)
 
-    return persons
+    return {
+        "page_size": pagination.page_size,
+        "page_number": pagination.page_number,
+        "values":persons
+    }
 
 
 @router.get("/search/",
@@ -69,4 +73,9 @@ async def get_search_persons(
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail=PERSON_NOT_FOUND_STR)
 
-    return persons
+    return {
+        "page_size": pagination.page_size,
+        "page_number": pagination.page_number,
+        "values":persons
+    }
+

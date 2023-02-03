@@ -55,7 +55,11 @@ async def get_all_films(
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail=FILM_NOT_FOUN_STR)
 
-    return films
+    return {
+        "page_size": pagination.page_size,
+        "page_number": pagination.page_number,
+        "values":films
+    }
 
 
 @router.get("/search/",
@@ -73,4 +77,8 @@ async def get_search_films(
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail=FILM_NOT_FOUN_STR)
 
-    return films
+    return {
+        "page_size": pagination.page_size,
+        "page_number": pagination.page_number,
+        "values":films
+    }
