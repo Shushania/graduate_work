@@ -24,3 +24,4 @@ RUN chmod +x /usr/src/app/entrypoint.sh
 COPY . /app/
 
 ENTRYPOINT ["bash", "/usr/src/app/entrypoint.sh"]
+>>>>>>> 68bb18e (Перенос всех необходимых сервисов с прошлых проектов)
