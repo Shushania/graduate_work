@@ -19,11 +19,11 @@ include(
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS')
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000', 'http://51.250.96.235:8000']
 
 DEBUG = os.environ.get('DEBUG', False) == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '51.250.96.235']
 
 ROOT_URLCONF = 'config.urls'
 
