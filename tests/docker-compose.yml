@@ -1,0 +1,57 @@
+version: "3.5"
+
+services:
+
+  redis:
+    image: "redis:alpine"
+    container_name: movie_test_redis
+    expose:
+      - "6379"
+    restart: always
+
+  fast_api:
+    container_name: movie_test_fast_api
+    image: movie_image_test_fast_api
+    build:
+      context: ../
+      dockerfile: ./fast_api/Dockerfile
+    env_file:
+      - ../.env.sample
+    ports:
+      - "8060:8060"
+    restart: on-failure
+
+  tests:
+    container_name: movie_test
+    image: movie_image_test_fast_api
+    env_file:
+      - ./.env.sample
+    entrypoint: >
+      sh -c "pip install -r /app/tests/functional/requirements.txt
+      && python3 /app/tests/functional/utils/wait_for_es.py
+      && python3 /app/tests/functional/utils/wait_for_redis.py
+      && pytest /app/tests/functional/src"
+    depends_on:
+      - elasticsearch
+      - fast_api
+      - redis
+    restart: "no"
+
+  elasticsearch:
+    image: elasticsearch:7.17.6
+    environment:
+      - discovery.type=single-node
+      - ingest.geoip.downloader.enabled=false
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms200m -Xmx200m
+    ports:
+      - "9200:9200"
+    container_name: movie_test_es
+    restart: on-failure
+
+
+volumes:
+  movie_test_elastic:
+    name: movie_test_elastic
+  movie_test_redis:
+    name: movie_test_redis

@@ -1,0 +1,91 @@
+version: "3.5"
+
+services:
+
+  nginx:
+    build: django+nginx/nginx
+    image: movie_image_nginx
+    volumes:
+      - ./mounts/media:/media/
+      - ./mounts/static:/static/
+    ports:
+      - 8000:8000
+    depends_on:
+      - backend
+    container_name: movie_nginx
+    restart: on-failure
+
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - movie_redis:/data
+    container_name: movie_redis
+    expose:
+      - "6379"
+    restart: always
+
+  backend:
+    build: django+nginx/app
+    image: movie_image_backend
+    volumes:
+      - ./mounts/media:/app/media/
+      - ./mounts/static:/app/static/
+    container_name: movie_backend
+    expose:
+      - "8080"
+    env_file:
+      - .env.sample
+    depends_on:
+      - redis
+      - pg
+      - elasticsearch
+    restart: always
+
+  etl:
+    container_name: movie_etl
+    image: movie_image_etl
+    build: etl
+    env_file:
+      - .env.sample
+    restart: always
+
+  fast_api:
+    container_name: movie_fast_api
+    image: movie_image_fast_api
+    build:
+      context: ./
+      dockerfile: fast_api/Dockerfile
+    env_file:
+      - .env.sample
+    expose:
+      - "8060"
+    restart: on-failure
+
+  elasticsearch:
+    image: elasticsearch:7.17.6
+    volumes:
+      - movie_elastic:/var/lib/elasticsearch/esdata1
+    environment:
+      - discovery.type=single-node
+      - ingest.geoip.downloader.enabled=false
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms200m -Xmx200m
+    container_name: movie_es
+    restart: on-failure
+
+  pg:
+    image: postgres:13
+    volumes:
+      - ./django+nginx/postgresql:/docker-entrypoint-initdb.d
+      - movie_postgresql:/var/lib/postgresql/data
+    env_file: .env.sample
+    container_name: movie_pg
+    restart: on-failure
+
+volumes:
+  movie_postgresql:
+    name: movie_postgresql
+  movie_elastic:
+    name: movie_elastic
+  movie_redis:
+    name: movie_redis

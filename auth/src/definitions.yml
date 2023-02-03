@@ -1,0 +1,35 @@
+openapi: 3.0.0
+
+info:
+  title: 'Authentication service'
+  version: '1.0'
+
+paths:
+  /auth/login:
+  /auth/signup:
+  /auth/logout:
+  /auth/refresh-token:
+  /auth/change-password:
+  /login-history/<uuid:user_id>:
+  /role:
+  /role/<uuid:role_id>:
+  /assign-roles:
+
+components:
+  schemas:
+    UserData:
+      title: User
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+        login:
+          type: string
+          title: login
+        email:
+          type: string
+          title: email
+        role:
+          type: string
+          title: role

@@ -1,0 +1,7 @@
+.idea
+.env
+elastic
+./postgresql
+redis
+mounts
+/venv/
