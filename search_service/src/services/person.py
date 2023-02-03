@@ -65,7 +65,8 @@ class PersonService(CacheKey):
         key = self._create_cache_key(
             [
                 CacheObj(key_name='filter', key_value=f'{filter_name}_{filter_arg}'),
-                CacheObj(key_name='sort', key_value=str(sort))
+                CacheObj(key_name='sort', key_value=str(sort)),
+                CacheObj(key_name='pagination', key_value=f'{page_size}_{page_number}')
             ]
         )
 
@@ -104,7 +105,8 @@ class PersonService(CacheKey):
         """
         key = self._create_cache_key(
             [
-                CacheObj(key_name='query', key_value=str(query))
+                CacheObj(key_name='query', key_value=str(query)),
+                CacheObj(key_name='pagination', key_value=f'{page_size}_{page_number}')
             ]
         )
 

@@ -54,7 +54,11 @@ async def get_all_genres(pagination: PaginatedParams = Depends(PaginatedParams),
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail=GENRE_NOT_FOUND_STR)
 
-    return genres
+    return {
+        "page_size": pagination.page_size,
+        "page_number": pagination.page_number,
+        "values":genres
+    }
 
 
 @router.get("/search/",
@@ -71,4 +75,8 @@ async def get_search_genres(
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail=GENRE_NOT_FOUND_STR)
 
-    return genres
+    return {
+        "page_size": pagination.page_size,
+        "page_number": pagination.page_number,
+        "values":genres
+    }
