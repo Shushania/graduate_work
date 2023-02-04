@@ -49,7 +49,15 @@ class AsyncElasticProvider(AsyncDataProvider):
         """
         Поиск результата по запросу
         """
-        body = {"query": {"multi_match": {"query": query, "fuzziness": "auto"}}}
+        body = {
+            "query": {
+                "multi_match": {
+                    "query": query,
+                    "fuzziness": "auto",
+                    "analyzer": "ru_en"
+                }
+            }
+        }
         return await self._search(index, body, page_size, page_number)
 
     async def get_by_id(
