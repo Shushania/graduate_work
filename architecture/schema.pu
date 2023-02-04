@@ -2,7 +2,6 @@
 !theme materia
 actor User
 actor Admin
-actor Analyst
 database PostgresMovieData
 database ElasticSearch
 database Redis as redis_2
@@ -11,10 +10,7 @@ component Assistant
 component LoadBalancer
 component FastAPI
 component ETL as etl_1
-component ETL as etl_2
 
-component Kafka
-component ClickHouse
 User -right-> Assistant: Запрос на просмотр контента
 Assistant -right-> LoadBalancer
 LoadBalancer -right-> FastAPI: Запрос данных
@@ -27,8 +23,4 @@ etl_1 -down-> PostgresMovieData
 etl_1 -up-> ElasticSearch
 Admin -left-> AdminPanel: Редактирование данных
 AdminPanel -left-> PostgresMovieData
-LoadBalancer -left-> Kafka
-Kafka -left-> etl_2
-etl_2 -left-> ClickHouse
-Analyst -left-> ClickHouse
 @enduml
