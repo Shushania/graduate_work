@@ -92,4 +92,3 @@ async def test_persons(query_data, expected_answer, es_write_data, make_get_requ
     Проверка кэша
     """
     assert body == await get_from_cache(key)
-

@@ -14,7 +14,7 @@ services:
     image: movie_image_test_fast_api
     build:
       context: ../
-      dockerfile: ./fast_api/Dockerfile
+      dockerfile: ../search_service/Dockerfile
     env_file:
       - ../.env.sample
     ports:

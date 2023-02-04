@@ -3,15 +3,15 @@ version: "3.5"
 services:
 
   nginx:
-    build: django+nginx/nginx
-    image: movie_image_nginx
+    build: nginx
+    image: movie_image_nginx:1
     volumes:
       - ./mounts/media:/media/
       - ./mounts/static:/static/
     ports:
       - 8000:8000
     depends_on:
-      - backend
+      - admin_panel
     container_name: movie_nginx
     restart: on-failure
 
@@ -24,37 +24,33 @@ services:
       - "6379"
     restart: always
 
-  backend:
-    build: django+nginx/app
-    image: movie_image_backend
+  admin_panel:
+    build: admin_panel/app
+    image: movie_image_admin_panel:1
     volumes:
       - ./mounts/media:/app/media/
       - ./mounts/static:/app/static/
-    container_name: movie_backend
+    container_name: movie_admin_panel
     expose:
       - "8080"
     env_file:
       - .env.sample
-    depends_on:
-      - redis
-      - pg
-      - elasticsearch
     restart: always
 
   etl:
     container_name: movie_etl
-    image: movie_image_etl
+    image: movie_image_etl:1
     build: etl
     env_file:
       - .env.sample
     restart: always
 
-  fast_api:
-    container_name: movie_fast_api
-    image: movie_image_fast_api
+  search_service:
+    container_name: movie_search_service
+    image: movie_image_search_service:1
     build:
       context: ./
-      dockerfile: fast_api/Dockerfile
+      dockerfile: search_service/Dockerfile
     env_file:
       - .env.sample
     expose:
@@ -76,7 +72,7 @@ services:
   pg:
     image: postgres:13
     volumes:
-      - ./django+nginx/postgresql:/docker-entrypoint-initdb.d
+      - ./admin_panel/postgresql:/docker-entrypoint-initdb.d
       - movie_postgresql:/var/lib/postgresql/data
     env_file: .env.sample
     container_name: movie_pg
