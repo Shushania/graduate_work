@@ -58,7 +58,7 @@ async def get_all_films(
     return {
         "page_size": pagination.page_size,
         "page_number": pagination.page_number,
-        "values":films
+        "values": films
     }
 
 
@@ -80,5 +80,5 @@ async def get_search_films(
     return {
         "page_size": pagination.page_size,
         "page_number": pagination.page_number,
-        "values":films
+        "values": films
     }

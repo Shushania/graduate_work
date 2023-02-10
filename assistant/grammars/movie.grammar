@@ -1,0 +1,43 @@
+root:
+    $Find? $Info? $What $Film
+    $Info $What? $Film?
+    $Find $What $Film?
+    $Find $About $What?
+    $Find $Film
+    %negative
+    $Find $Person $Film
+
+slots:
+    film:
+        source: $Film
+
+$Film:
+    .+
+
+$Find:
+    %lemma
+    найди
+    поищи
+    скажи (о|про)+ этот?
+    расскажи (о|про)+ этот?
+
+$Info:
+    %lemma
+    описание
+    информация
+
+$What:
+    %lemma
+    фильм
+    кино
+    сериал
+
+$About:
+    %lemma
+    о нем
+    про него
+
+$Person:
+    %lemma
+    режиссера
+    актера
