@@ -3,41 +3,33 @@ INDEXES = ['''
   "settings": {
     "refresh_interval": "1s",
     "analysis": {
-      "filter": {
-        "english_stop": {
-          "type":       "stop",
-          "stopwords":  "_english_"
+        "filter": {
+            "russian_stop": {
+                "type":       "stop",
+                "stopwords":  "_russian_"
+            },
+            "russian_stemmer": {
+                "type": "stemmer",
+                "language": "russian"
+            }
         },
-        "english_stemmer": {
-          "type": "stemmer",
-          "language": "english"
+        "char_filter":{
+            "e_char_filter": {
+                "type": "mapping",
+                "mappings": ["Ё => Е", "ё => е", "Э => Е", "э => е"]
+            }
         },
-        "english_possessive_stemmer": {
-          "type": "stemmer",
-          "language": "possessive_english"
-        },
-        "russian_stop": {
-          "type":       "stop",
-          "stopwords":  "_russian_"
-        },
-        "russian_stemmer": {
-          "type": "stemmer",
-          "language": "russian"
+        "analyzer": {
+            "ru": {
+                "tokenizer": "standard",
+                "filter": [
+                    "lowercase",
+                    "russian_stop",
+                    "russian_stemmer"
+                ],
+                "char_filter": ["e_char_filter"]      
+            }
         }
-      },
-      "analyzer": {
-        "ru_en": {
-          "tokenizer": "standard",
-          "filter": [
-            "lowercase",
-            "english_stop",
-            "english_stemmer",
-            "english_possessive_stemmer",
-            "russian_stop",
-            "russian_stemmer"
-          ]
-        }
-      }
     }
   },
   "mappings": {
@@ -53,7 +45,7 @@ INDEXES = ['''
       },
       "title": {
         "type": "text",
-        "analyzer": "ru_en",
+        "analyzer": "ru",
         "fields": {
           "raw": { 
             "type":  "keyword"
@@ -62,19 +54,19 @@ INDEXES = ['''
       },
       "description": {
         "type": "text",
-        "analyzer": "ru_en"
+        "analyzer": "ru"
       },
       "director": {
         "type": "text",
-        "analyzer": "ru_en"
+        "analyzer": "ru"
       },
       "actors_names": {
         "type": "text",
-        "analyzer": "ru_en"
+        "analyzer": "ru"
       },
       "writers_names": {
         "type": "text",
-        "analyzer": "ru_en"
+        "analyzer": "ru"
       },
       "actors": {
         "type": "nested",
@@ -85,7 +77,7 @@ INDEXES = ['''
           },
           "name": {
             "type": "text",
-            "analyzer": "ru_en"
+            "analyzer": "ru"
           }
         }
       },
@@ -98,7 +90,7 @@ INDEXES = ['''
           },
           "name": {
             "type": "text",
-            "analyzer": "ru_en"
+            "analyzer": "ru"
           }
         }
       }
@@ -110,41 +102,33 @@ INDEXES = ['''
   "settings": {
     "refresh_interval": "1s",
     "analysis": {
-      "filter": {
-        "english_stop": {
-          "type":       "stop",
-          "stopwords":  "_english_"
+        "filter": {
+            "russian_stop": {
+                "type":       "stop",
+                "stopwords":  "_russian_"
+            },
+            "russian_stemmer": {
+                "type": "stemmer",
+                "language": "russian"
+            }
         },
-        "english_stemmer": {
-          "type": "stemmer",
-          "language": "english"
+        "char_filter":{
+            "e_char_filter": {
+                "type": "mapping",
+                "mappings": ["Ё => Е", "ё => е", "Э => Е", "э => е"]
+            }
         },
-        "english_possessive_stemmer": {
-          "type": "stemmer",
-          "language": "possessive_english"
-        },
-        "russian_stop": {
-          "type":       "stop",
-          "stopwords":  "_russian_"
-        },
-        "russian_stemmer": {
-          "type": "stemmer",
-          "language": "russian"
+        "analyzer": {
+            "ru": {
+                "tokenizer": "standard",
+                "filter": [
+                    "lowercase",
+                    "russian_stop",
+                    "russian_stemmer"
+                ],
+                "char_filter": ["e_char_filter"]      
+            }
         }
-      },
-      "analyzer": {
-        "ru_en": {
-          "tokenizer": "standard",
-          "filter": [
-            "lowercase",
-            "english_stop",
-            "english_stemmer",
-            "english_possessive_stemmer",
-            "russian_stop",
-            "russian_stemmer"
-          ]
-        }
-      }
     }
   },
   "mappings": {
@@ -154,7 +138,7 @@ INDEXES = ['''
       },
       "name": {
         "type": "text",
-        "analyzer": "ru_en",
+        "analyzer": "ru",
         "fields": {
           "raw": { 
             "type":  "keyword"
@@ -163,7 +147,7 @@ INDEXES = ['''
       },
       "description": {
         "type": "text",
-        "analyzer": "ru_en"
+        "analyzer": "ru"
       }
     }
   }
@@ -173,41 +157,33 @@ INDEXES = ['''
   "settings": {
     "refresh_interval": "1s",
     "analysis": {
-      "filter": {
-        "english_stop": {
-          "type":       "stop",
-          "stopwords":  "_english_"
+        "filter": {
+            "russian_stop": {
+                "type":       "stop",
+                "stopwords":  "_russian_"
+            },
+            "russian_stemmer": {
+                "type": "stemmer",
+                "language": "russian"
+            }
         },
-        "english_stemmer": {
-          "type": "stemmer",
-          "language": "english"
+        "char_filter":{
+            "e_char_filter": {
+                "type": "mapping",
+                "mappings": ["Ё => Е", "ё => е", "Э => Е", "э => е"]
+            }
         },
-        "english_possessive_stemmer": {
-          "type": "stemmer",
-          "language": "possessive_english"
-        },
-        "russian_stop": {
-          "type":       "stop",
-          "stopwords":  "_russian_"
-        },
-        "russian_stemmer": {
-          "type": "stemmer",
-          "language": "russian"
+        "analyzer": {
+            "ru": {
+                "tokenizer": "standard",
+                "filter": [
+                    "lowercase",
+                    "russian_stop",
+                    "russian_stemmer"
+                ],
+                "char_filter": ["e_char_filter"]      
+            }
         }
-      },
-      "analyzer": {
-        "ru_en": {
-          "tokenizer": "standard",
-          "filter": [
-            "lowercase",
-            "english_stop",
-            "english_stemmer",
-            "english_possessive_stemmer",
-            "russian_stop",
-            "russian_stemmer"
-          ]
-        }
-      }
     }
   },
   "mappings": {
@@ -217,7 +193,7 @@ INDEXES = ['''
       },
       "full_name": {
         "type": "text",
-        "analyzer": "ru_en",
+        "analyzer": "ru",
         "fields": {
           "raw": { 
             "type":  "keyword"

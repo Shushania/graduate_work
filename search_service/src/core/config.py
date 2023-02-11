@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     ELASTIC_HOST = os.getenv('ELASTIC_HOST', '127.0.0.1')
     ELASTIC_PORT = int(os.getenv('ELASTIC_PORT', 9200))
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    default_page_size = 10
+    default_page_size = 3
     default_page_number = 1
     FILM_CACHE_EXPIRE_IN_SECONDS = 60 * 5
 
