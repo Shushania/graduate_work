@@ -35,7 +35,7 @@ services:
       - "8080"
     env_file:
       - .env.sample
-    restart: 'no'
+    restart: always
 
   etl:
     container_name: movie_etl
