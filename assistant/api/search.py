@@ -43,11 +43,11 @@ class SearchConnector:
 
     def _find_film_data(self, query: str) -> Optional[UUID]:
         response = self._get_response(
-            "films/search/",
+            "films/",
             query={
-                "query": query,
-                "page_number": 1,
-                "page_size": 1
+                "sort": "imdb_rating",
+                "filter_name": "title",
+                "filter_arg": query,
             },
         )
         if response.status_code != HTTPStatus.OK:
@@ -62,7 +62,7 @@ class SearchConnector:
 
         return Film(**response.json())
 
-    def _find_films(self, genre, page: int = 1, size: int = 3):
+    def _find_films(self, genre: str = None, page: int = 1, size: int = 3):
         if genre:
             response = self._get_response(
                 "films/",
