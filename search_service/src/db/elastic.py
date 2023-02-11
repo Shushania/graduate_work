@@ -54,7 +54,11 @@ class AsyncElasticProvider(AsyncDataProvider):
                 "multi_match": {
                     "query": query,
                     "fuzziness": "auto",
+<<<<<<< HEAD
                     "analyzer": "ru_en"
+=======
+                    "analyzer": "ru"
+>>>>>>> 9bff06e ('Русская' база данных и обновление конфигов эластики)
                 }
             }
         }

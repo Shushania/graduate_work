@@ -12,11 +12,11 @@ echo "Postgres is ready"
 
 # Для первого запуска
 # ------
-# python manage.py migrate movies 0001 --fake
-# python manage.py migrate movies 0008
-# python manage.py migrate movies 0009 --fake
+python manage.py migrate movies 0001 --fake
+python manage.py migrate movies 0008
+python manage.py migrate movies 0009 --fake
 ## Подгрузка фильмов, жанров и персон
-# python sqlite_to_postgres/load_data.py
+python manage.py dump_films
 # ------
 
 # Миграции
