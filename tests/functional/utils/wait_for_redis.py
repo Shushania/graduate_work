@@ -1,6 +1,6 @@
 import logging
-from redis import Redis
 
+from redis import Redis
 from tests.functional.decorator import backoff
 from tests.functional.settings import test_settings
 

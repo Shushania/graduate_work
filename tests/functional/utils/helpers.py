@@ -2,6 +2,7 @@ import uuid
 
 from tests.functional.settings import test_settings
 
+
 async def set_uuid(data: dict) -> dict:
     es_data = []
     for _ in range(20):

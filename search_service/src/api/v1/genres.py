@@ -3,8 +3,8 @@ from http import HTTPStatus
 from logging import config as logging_config
 from typing import Optional
 
-from src.core.logger import LOGGING
 from fastapi import APIRouter, Depends, HTTPException
+from src.core.logger import LOGGING
 from src.models.data_models import Genre
 from src.services.genre import GenreService, get_genre_service
 

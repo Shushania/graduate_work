@@ -1,7 +1,7 @@
-from aioredis import create_redis_pool, Redis
 import ast
-import pytest
 
+import pytest
+from aioredis import Redis, create_redis_pool
 from tests.functional.settings import test_settings
 
 

@@ -1,6 +1,6 @@
-from elasticsearch import Elasticsearch
 import logging
 
+from elasticsearch import Elasticsearch
 from tests.functional.decorator import backoff
 from tests.functional.settings import test_settings
 

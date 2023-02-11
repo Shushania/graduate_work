@@ -1,7 +1,7 @@
-import aiohttp
-import pytest
 import json
 
+import aiohttp
+import pytest
 from tests.functional.settings import test_settings
 
 

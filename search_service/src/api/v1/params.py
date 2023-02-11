@@ -1,5 +1,4 @@
 from fastapi import Query
-
 from src.core.config import settings
 
 

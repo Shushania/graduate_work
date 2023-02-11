@@ -4,7 +4,6 @@ from logging import config as logging_config
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
-
 from src.core.logger import LOGGING
 from src.models.data_models import ElasticFilmWork, Film
 from src.services.film import FilmService, get_film_service

@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from typing import Optional
 
 from aioredis import Redis
-
 from src.core.config import settings
 
 

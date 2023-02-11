@@ -1,8 +1,8 @@
-from elasticsearch import AsyncElasticsearch
-import pytest
 import json
 from typing import List
 
+import pytest
+from elasticsearch import AsyncElasticsearch
 from tests.functional.settings import test_settings
 
 
