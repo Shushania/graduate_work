@@ -72,7 +72,8 @@ async def get_search_films(
     films = await film_service.get_search_films(
         page_size=pagination.page_size,
         page_number=pagination.page_number,
-        query=query)
+        query=query
+    )
     if not films:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail=FILM_NOT_FOUN_STR)

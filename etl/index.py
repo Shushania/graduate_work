@@ -16,7 +16,7 @@ INDEXES = ['''
         "char_filter":{
             "e_char_filter": {
                 "type": "mapping",
-                "mappings": ["Ё => Е", "ё => е"]
+                "mappings": ["Ё => Е", "ё => е", "Э => Е", "э => е"]
             }
         },
         "analyzer": {
@@ -115,7 +115,7 @@ INDEXES = ['''
         "char_filter":{
             "e_char_filter": {
                 "type": "mapping",
-                "mappings": ["Ё => Е", "ё => е"]
+                "mappings": ["Ё => Е", "ё => е", "Э => Е", "э => е"]
             }
         },
         "analyzer": {
@@ -170,7 +170,7 @@ INDEXES = ['''
         "char_filter":{
             "e_char_filter": {
                 "type": "mapping",
-                "mappings": ["Ё => Е", "ё => е"]
+                "mappings": ["Ё => Е", "ё => е", "Э => Е", "э => е"]
             }
         },
         "analyzer": {
