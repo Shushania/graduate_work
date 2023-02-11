@@ -17,15 +17,15 @@ def get_director(form, current_state):
     current_state.update(api_req)
 
     if "film" not in current_state:
-        return "Кажется, я не знаю про какой фильм идет речь", current_state
+        return "Извините, не понимаю, что вы хотите", current_state
 
     film_name, directors_names = api.find_film_directors(current_state["film"])
     if not film_name:
-        return "К сожалению, я не смогла найти этот фильм", current_state
+        return "Я не смогла найти этот фильм", current_state
 
     if not directors_names:
         return (
-            "К сожалению, я не нашла режиссера фильма " + film_name,
+            "Я не нашла режиссера фильма " + film_name,
             current_state,
         )
 
@@ -44,11 +44,11 @@ def get_film(form, current_state) -> Optional[Film]:
     current_state.update(api_req)
 
     if "film" not in current_state:
-        return "Кажется, я не знаю про какой фильм идет речь", current_state
+        return "Извините, не понимаю, что вы хотите", current_state
 
     film = api._find_film_data(current_state["film"])
     if not film:
-        return "К сожалению, я не смогла найти этот фильм", current_state
+        return "Я не смогла найти этот фильм", current_state
 
     return (
         get_phrase(
@@ -71,15 +71,15 @@ def get_actor(form, current_state):
     current_state.update(api_req)
 
     if "film" not in current_state:
-        return "Уточните еще раз фильм", current_state
+        return "Извините, не понимаю, что вы хотите", current_state
 
     film_name, actors_names = api.find_film_actors(current_state["film"])
     if not film_name:
-        return "К сожалению, я не смогла найти этот фильм", current_state
+        return "Я не смогла найти этот фильм", current_state
 
     if not actors_names:
         return (
-            "К сожалению, я не нашла актеров фильма " + film_name,
+            "Я не нашла актеров фильма " + film_name,
             current_state,
         )
 
@@ -96,7 +96,7 @@ def get_films(form, current_state):
     if is_next:
         if "page" not in current_state:
             return (
-                "Попросите меня найти лучшие фильмы или картины определенного жанра",
+                "Извините, не понимаю, что вы хотите",
                 current_state,
             )
         current_state["page"] += 1
@@ -137,7 +137,7 @@ def get_person(form, current_state):
     current_state.update(api_req)
 
     if "person" not in current_state:
-        return "Я не смогла понять о ком идет речь", current_state
+        return "Извините, не понимаю, что вы хотите", current_state
 
     person_name, film_names = api.find_person_films(current_state["person"])
 
@@ -146,7 +146,7 @@ def get_person(form, current_state):
 
     if not film_names:
         return (
-            "К сожалению, я не нашла фильмов с участием " + person_name,
+            "Я не нашла фильмов с участием " + person_name,
             current_state,
         )
 
