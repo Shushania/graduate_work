@@ -35,5 +35,4 @@ def handler(event, context):
         "response": {"text": text, "end_session": end_session},
         "session_state": {"current_state": current_state, "last_phrase": text},
     }
-
     return response
