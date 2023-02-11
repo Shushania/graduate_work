@@ -35,11 +35,8 @@ class SearchConnector:
         person = self._find_person(query)
         if not person:
             return None, None
-
-        films = self._get_films_by_person_uuid(person.id)
-        film_names = ", ".join(film.title for film in films) if films else None
-
-        return person.full_name, film_names
+        films = self._get_films_by_actors(query)
+        return person.full_name, films
 
     def _find_film_data(self, query: str) -> Optional[UUID]:
         response = self._get_response(
@@ -70,8 +67,8 @@ class SearchConnector:
                     "sort": "imdb_rating",
                     "filter_name": "genre",
                     "filter_arg": genre,
-                    "page_number": page,
-                    "page_size": size,
+                    "page[number]": page,
+                    "page[size]": size,
                 },
             )
         else:
@@ -79,8 +76,8 @@ class SearchConnector:
                 "films/",
                 query={
                     "sort": "imdb_rating",
-                    "page_number": page,
-                    "page_size": size,
+                    "page[number]": page,
+                    "page[size]": size,
                 },
             )
 
@@ -99,17 +96,17 @@ class SearchConnector:
             return None
         return Person(**response.json()["values"][0])
 
-    def _get_films_by_person_uuid(self, person_uuid: UUID) -> Optional[List[Film]]:
-        response = self._get_response(f"persons/{person_uuid}")
+    def _get_films_by_actors(self, query):
+        response = self._get_response(
+            "films/",
+            query={
+                "sort": "imdb_rating",
+                "filter_name": "actors_names",
+                "filter_arg": query,
+            },
+        )
         if response.status_code != HTTPStatus.OK:
             return None
-
-        film_ids = response.json()["film_ids"][:5]
-        films = []
-
-        for film_id in film_ids:
-            film = self._get_film_by_uuid(film_id)
-            if film:
-                films.append(film)
+        films = ', '.join([film["title"] for film in response.json()["values"]])
 
         return films

@@ -1,0 +1,55 @@
+root:
+    $Find? $Top $Films
+    $Find $Films
+    $Find $Top
+    $Find $Films $Top
+    $Find $Films $In $Genre
+    $Find $Top? $In $Genre
+    $Find? [$Top $In $Genre]
+    а? $Next $Next*
+
+slots:
+    genre:
+        source: $Genre
+    next:
+        source: $Next
+
+$Next:
+    %lemma
+    продолжай
+    следующие
+    дальше
+    еще
+
+$In:
+    %lemma
+    из жанра
+    в жанре?
+
+$Genre:
+    .+
+
+$Find:
+    %lemma
+    у какого фильма
+    какие ты знаешь
+    порекомендуй
+    посоветуй
+    подскажи
+    найди
+    назови
+    выдай
+
+$Top:
+    %lemma
+    лучшие
+    рейтинг
+    топ
+    самый? высокий рейтинг
+    с самым? высоким рейтингом
+
+$Films:
+    %lemma
+    фильмы
+    кино
+    картины
