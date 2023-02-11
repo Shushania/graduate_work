@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from typing import List, Optional, Tuple
 from uuid import UUID
 
 import requests
@@ -38,7 +37,7 @@ class SearchConnector:
         films = self._get_films_by_actors(query)
         return person.full_name, films
 
-    def _find_film_data(self, query: str) -> Optional[UUID]:
+    def _find_film_data(self, query: str):
         response = self._get_response(
             "films/",
             query={
@@ -52,7 +51,7 @@ class SearchConnector:
 
         return Film(**response.json()["values"][0])
 
-    def _get_film_by_uuid(self, film_uuid: UUID) -> Optional[Film]:
+    def _get_film_by_uuid(self, film_uuid: UUID):
         response = self._get_response(f"films/{film_uuid}")
         if response.status_code != HTTPStatus.OK:
             return None
@@ -85,7 +84,7 @@ class SearchConnector:
             return None
         return [FilmBase(**row) for row in response.json()["values"]]
 
-    def _find_person(self, query: str) -> Optional[Person]:
+    def _find_person(self, query: str):
         response = self._get_response(
             "persons/search/",
             query={
