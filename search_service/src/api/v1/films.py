@@ -4,7 +4,6 @@ from logging import config as logging_config
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
-
 from src.core.logger import LOGGING
 from src.models.data_models import ElasticFilmWork, Film
 from src.services.film import FilmService, get_film_service
@@ -58,7 +57,7 @@ async def get_all_films(
     return {
         "page_size": pagination.page_size,
         "page_number": pagination.page_number,
-        "values":films
+        "values": films
     }
 
 
@@ -81,5 +80,5 @@ async def get_search_films(
     return {
         "page_size": pagination.page_size,
         "page_number": pagination.page_number,
-        "values":films
+        "values": films
     }

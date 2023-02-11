@@ -1,6 +1,6 @@
 from http import HTTPStatus
-import pytest
 
+import pytest
 from tests.functional.testdata.es_mapping import films
 from tests.functional.testdata.validate_mapping import all_film_map, film_map
 from tests.functional.utils.helpers import get_all_cache_key, set_uuid

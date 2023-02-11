@@ -1,6 +1,8 @@
-from django.core.management.base import BaseCommand
-from movies.models import Filmwork, Person, Genre, GenreFilmwork, PersonFilmwork
 import requests
+from django.core.management.base import BaseCommand
+from movies.models import (Filmwork, Genre, GenreFilmwork, Person,
+                           PersonFilmwork)
+
 
 class Command(BaseCommand):
     max_page=100

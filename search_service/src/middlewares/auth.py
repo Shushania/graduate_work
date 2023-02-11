@@ -1,9 +1,11 @@
-from fastapi import Request, HTTPException
-import jwt
-import os
 import datetime
-from fastapi.responses import Response
+import os
 from http import HTTPStatus
+
+import jwt
+from fastapi import HTTPException, Request
+from fastapi.responses import Response
+
 
 class AuthMiddleware:
 

@@ -1,13 +1,12 @@
 import logging
 
 import aioredis
-
-from src.api.v1 import films, genres, persons
-from src.core.config import settings
-from src.db import elastic, redis
 from elasticsearch import AsyncElasticsearch
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
+from src.api.v1 import films, genres, persons
+from src.core.config import settings
+from src.db import elastic, redis
 from src.middlewares.auth import AuthMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 

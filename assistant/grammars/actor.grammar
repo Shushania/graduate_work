@@ -1,0 +1,42 @@
+root:
+    $Find? [$Actor $Of? $Film]
+    $Ellipsis
+
+slots:
+    film:
+        source: $Film
+
+$Ellipsis:
+    $LeftFiller? [$Actor $This?]
+
+$LeftFiller:
+    а
+
+$Film:
+    .+
+
+$Of:
+    %lemma
+    в фильме
+    в кино
+
+$Actor:
+    %lemma
+    какие? актеры $This? (играли|снимались)?
+    кто $This? (снимался|играл)
+    кто $This? главный? актер
+    (снимался|играл)
+
+$This:
+    %lemma
+    там
+    в нем
+    в ней
+    в этом фильме
+    в этом кино
+
+$Find:
+    назови
+    поищи
+    найди
+    скажи

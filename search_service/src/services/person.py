@@ -4,13 +4,11 @@ from logging import config as logging_config
 from typing import List, Optional
 
 from fastapi import Depends
-
 from src.core.logger import LOGGING
-from src.db.elastic import get_elastic, AsyncDataProvider
-from src.db.redis import get_redis, AsyncCacheStorage
-from src.models.data_models import Person
+from src.db.elastic import AsyncDataProvider, get_elastic
+from src.db.redis import AsyncCacheStorage, get_redis
+from src.models.data_models import ListCache, Person
 from src.services.cache_generate import CacheKey, CacheObj
-from src.models.data_models import ListCache
 
 FILM_CACHE_EXPIRE_IN_SECONDS = 60 * 5
 

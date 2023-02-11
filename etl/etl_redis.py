@@ -1,9 +1,8 @@
 from datetime import datetime
 
 from decorator import backoff
-from settings import Settings
-
 from redis import Redis
+from settings import Settings
 
 
 class ETLRedis:

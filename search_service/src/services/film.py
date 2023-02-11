@@ -4,13 +4,11 @@ from logging import config as logging_config
 from typing import List, Optional
 
 from fastapi import Depends
-
 from src.core.logger import LOGGING
-from src.db.redis import get_redis, AsyncCacheStorage
-from src.models.data_models import ElasticFilmWork, Film
+from src.db.elastic import AsyncDataProvider, get_elastic
+from src.db.redis import AsyncCacheStorage, get_redis
+from src.models.data_models import ElasticFilmWork, Film, ListCache
 from src.services.cache_generate import CacheKey, CacheObj
-from src.db.elastic import get_elastic, AsyncDataProvider
-from src.models.data_models import ListCache
 
 logging_config.dictConfig(LOGGING)
 logger = logging.getLogger('root')
