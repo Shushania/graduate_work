@@ -6,14 +6,16 @@ database PostgresMovieData
 database ElasticSearch
 database Redis as redis_2
 component AdminPanel
-component Assistant
+component Assistant_front
+component Assistant_back
 component LoadBalancer
 component FastAPI
 component ETL as etl_1
 
-User -right-> Assistant: Запрос на просмотр контента
-Assistant -right-> LoadBalancer
-LoadBalancer -right-> FastAPI: Запрос данных
+User -right-> Assistant_front: Запрос на просмотр контента
+Assistant_front -right-> LoadBalancer
+LoadBalancer -right-> Assistant_back
+Assistant_back -right-> FastAPI: Запрос данных
 
 FastAPI <--> ElasticSearch
 FastAPI <--> redis_2: Cache
