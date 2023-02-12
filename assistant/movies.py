@@ -118,7 +118,7 @@ def get_films(form, current_state):
         return "Я не смогла найти ни одного фильма", current_state
 
     film_names = ". ".join(
-        [film.title + ", рейтинг " + str(film.imdb_rating) for film in films]
+        [f"{film.title}, рейтинг {str(film.imdb_rating)}" for film in films]
     )
 
     return (
