@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from typing import Optional, Tuple, List
 from uuid import UUID
 
 import httpx
@@ -10,34 +11,39 @@ class SearchConnector:
     def __init__(self, url):
         self._url = url
 
-    def _get_response(self, path: str, query: str = ""):
+    def _get_response(self, path: str, query: str = "") -> Optional[dict]:
         response = httpx.get(self._url + path, params=query)
         return response
 
-    def find_film_directors(self, query: str):
+    def find_film_directors(self, query: str
+                            ) -> Tuple[Optional[str], Optional[str]]:
         film = self._find_film_data(query)
         if not film:
             return None, None
         return film.title, ", ".join(film.director)
 
-    def find_film_actors(self, query: str, page: int = 1, size: int = 5):
+    def find_film_actors(self, query: str, page: int = 1, size: int = 5
+                         ) -> Tuple[Optional[str], Optional[str]]:
         film = self._find_film_data(query, page, size)
         if not film:
             return None, None
         return film.title, ", ".join(film.actors_names)
 
-    def find_top_films(self, genre: str = None, page: int = 1):
+    def find_top_films(self, genre: str = None, page: int = 1
+                       ) -> List[Optional[FilmBase]]:
         films = self._find_films(genre=genre, page=page)
         return films
 
-    def find_person_films(self, query: str):
+    def find_person_films(self, query: str
+                          ) -> Tuple[Optional[str], Optional[str]]:
         person = self._find_person(query)
         if not person:
             return None, None
         films = self._get_films_by_actors(query)
         return person.full_name, films
 
-    def _find_film_data(self, query: str, page: int = 1, size: int = 3):
+    def _find_film_data(self, query: str, page: int = 1, size: int = 3
+                        ) -> Optional[Film]:
         response = self._get_response(
             "films/",
             query={
@@ -53,14 +59,16 @@ class SearchConnector:
 
         return Film(**response.json()["values"][0])
 
-    def _get_film_by_uuid(self, film_uuid: UUID):
+    def _get_film_by_uuid(self, film_uuid: UUID
+                          ) -> Optional[Film]:
         response = self._get_response(f"films/{film_uuid}")
         if response.status_code != HTTPStatus.OK:
             return None
 
         return Film(**response.json())
 
-    def _find_films(self, genre: str = None, page: int = 1, size: int = 3):
+    def _find_films(self, genre: str = None, page: int = 1, size: int = 3
+                    ) -> List[Optional[FilmBase]]:
         if genre:
             response = self._get_response(
                 "films/",
@@ -86,7 +94,8 @@ class SearchConnector:
             return None
         return [FilmBase(**row) for row in response.json()["values"]]
 
-    def _find_person(self, query: str):
+    def _find_person(self, query: str
+                     ) -> Optional[Person]:
         response = self._get_response(
             "persons/search/",
             query={
@@ -97,7 +106,8 @@ class SearchConnector:
             return None
         return Person(**response.json()["values"][0])
 
-    def _get_films_by_actors(self, query):
+    def _get_films_by_actors(self, query
+                             ) -> Optional[str]:
         response = self._get_response(
             "films/",
             query={
