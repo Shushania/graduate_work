@@ -4,8 +4,9 @@ import phrases
 from api.models import Film
 from api.search import SearchConnector
 from phrases import get_phrase
+from core.config import settings
 
-api = SearchConnector("http://51.250.96.235:8000/api/v1/")
+api = SearchConnector(settings.SEARCHING_SERVICE)
 
 
 def get_director(form, current_state):

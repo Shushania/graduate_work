@@ -1,7 +1,7 @@
 from http import HTTPStatus
 from uuid import UUID
 
-import requests
+import httpx
 
 from .models import Film, FilmBase, Person
 
@@ -11,7 +11,7 @@ class SearchConnector:
         self._url = url
 
     def _get_response(self, path: str, query: str = ""):
-        response = requests.get(self._url + path, params=query)
+        response = httpx.get(self._url + path, params=query)
         return response
 
     def find_film_directors(self, query: str):
