@@ -5,17 +5,14 @@ from api.models import Film
 from api.search import SearchConnector
 from phrases import get_phrase
 from core.config import settings
+from helper.helper import api_helper
 
 api = SearchConnector(settings.SEARCHING_SERVICE)
 
 
 def get_director(form, current_state):
     """Ищет режиссера по названию фильма."""
-    api_req = {
-        "film": form["slots"].get("film", {}).get("value"),
-    }
-    api_req = {k: v for k, v in api_req.items() if v}
-    current_state.update(api_req)
+    current_state.update(api_helper(form=form, subject="film"))
 
     if "film" not in current_state:
         return "Извините, не понимаю, что вы хотите", current_state
@@ -38,11 +35,8 @@ def get_director(form, current_state):
 
 def get_film(form, current_state) -> Optional[Film]:
     """Ищет фильм по названию и рассказывает о нем информацию."""
-    api_req = {
-        "film": form["slots"].get("film", {}).get("value"),
-    }
-    api_req = {k: v for k, v in api_req.items() if v}
-    current_state.update(api_req)
+
+    current_state.update(api_helper(form=form, subject="film"))
 
     if "film" not in current_state:
         return "Извините, не понимаю, что вы хотите", current_state
@@ -65,11 +59,7 @@ def get_film(form, current_state) -> Optional[Film]:
 
 def get_actor(form, current_state):
     """Ищет актеров по названию фильма."""
-    api_req = {
-        "film": form["slots"].get("film", {}).get("value"),
-    }
-    api_req = {k: v for k, v in api_req.items() if v}
-    current_state.update(api_req)
+    current_state.update(api_helper(form=form, subject="film"))
 
     if "film" not in current_state:
         return "Извините, не понимаю, что вы хотите", current_state
@@ -131,11 +121,7 @@ def get_films(form, current_state):
 
 def get_person(form, current_state):
     """Ищет персону и его фильмы."""
-    api_req = {
-        "person": form["slots"].get("person", {}).get("value"),
-    }
-    api_req = {k: v for k, v in api_req.items() if v}
-    current_state.update(api_req)
+    current_state.update(api_helper(form=form, subject="person"))
 
     if "person" not in current_state:
         return "Извините, не понимаю, что вы хотите", current_state
