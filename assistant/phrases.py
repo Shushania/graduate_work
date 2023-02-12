@@ -1,6 +1,5 @@
 import random
 from string import Template
-from typing import List
 
 INTRO = (
     'Привет! Какой фильм тебя интересует? '
@@ -12,6 +11,10 @@ HELP = (
 UNSUCCESSFUL = [
     "Извините, я вас не поняла"
 ]
+NOTHING = [
+    "Я не получила ваше сообщение, повторите пожалуйста"
+]
+
 EXIT = (
     "До скорых встреч!"
 )
@@ -34,6 +37,6 @@ FILMS = [
 
 
 def get_phrase(phrase, **kwargs):
-    template_string = random.choice(phrase) if isinstance(phrase, List) else phrase
+    template_string = random.choice(phrase) if isinstance(phrase, list) else phrase
     result = Template(template_string).substitute(**kwargs)
     return result

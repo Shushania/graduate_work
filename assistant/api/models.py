@@ -27,7 +27,7 @@ class FilmBase(BaseModel):
     imdb_rating: float
 
 
-class Film(FilmBase, BaseModel):
+class Film(FilmBase):
     """Подробная информация о фильме."""
 
     id: uuid.UUID

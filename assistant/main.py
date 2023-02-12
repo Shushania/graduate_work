@@ -28,6 +28,8 @@ def handler(event, context):
         text, current_state = get_person(intents.get("person"), current_state)
     elif command:
         text = get_phrase(phrases.UNSUCCESSFUL)
+    else:
+        text = get_phrase(phrases.NOTHING)
 
     response = {
         "version": event["version"],
