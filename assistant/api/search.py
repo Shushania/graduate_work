@@ -20,11 +20,11 @@ class SearchConnector:
             return None, None
         return film.title, ", ".join(film.director)
 
-    def find_film_actors(self, query: str, limit: int = 5):
-        film = self._find_film_data(query)
+    def find_film_actors(self, query: str, page: int = 1, size: int = 5):
+        film = self._find_film_data(query, page, size)
         if not film:
             return None, None
-        return film.title, ", ".join(film.actors_names[:limit])
+        return film.title, ", ".join(film.actors_names)
 
     def find_top_films(self, genre: str = None, page: int = 1):
         films = self._find_films(genre=genre, page=page)
@@ -37,13 +37,15 @@ class SearchConnector:
         films = self._get_films_by_actors(query)
         return person.full_name, films
 
-    def _find_film_data(self, query: str):
+    def _find_film_data(self, query: str, page: int = 1, size: int = 3):
         response = self._get_response(
             "films/",
             query={
                 "sort": "imdb_rating",
                 "filter_name": "title",
                 "filter_arg": query,
+                "page[number]": page,
+                "page[size]": size,
             },
         )
         if response.status_code != HTTPStatus.OK:
