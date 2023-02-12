@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Optional, Tuple, List
+from typing import List, Optional, Tuple
 from uuid import UUID
 
 import httpx

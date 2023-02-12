@@ -3,9 +3,9 @@ from typing import Optional
 import phrases
 from api.models import Film
 from api.search import SearchConnector
-from phrases import get_phrase
 from core.config import settings
 from helper.helper import api_helper
+from phrases import get_phrase
 
 api = SearchConnector(settings.SEARCHING_SERVICE)
 
